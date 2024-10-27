@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Coman_Bogdan_Lab2.Data;
 using Coman_Bogdan_Lab2.Models;
 
-namespace Coman_Bogdan_Lab2.Pages.Books
+namespace Coman_Bogdan_Lab2.Pages.Categories
 {
     public class IndexModel : PageModel
     {
@@ -19,14 +19,11 @@ namespace Coman_Bogdan_Lab2.Pages.Books
             _context = context;
         }
 
-        public IList<Models.Book> Book { get;set; } = default!;
+        public IList<Category> Category { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Book = await _context.Book
-                .Include(b => b.Publisher)
-                .Include(b => b.Author)
-                .ToListAsync();
+            Category = await _context.Category.ToListAsync();
         }
     }
 }

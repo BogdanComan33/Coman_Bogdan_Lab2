@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Coman_Bogdan_Lab2.Data;
 using Coman_Bogdan_Lab2.Models;
 
-namespace Coman_Bogdan_Lab2.Pages.Authors
+namespace Coman_Bogdan_Lab2.Pages.Categories
 {
     public class EditModel : PageModel
     {
@@ -21,8 +21,7 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
         }
 
         [BindProperty]
-        public Author Authors { get; set; } = default!;
-       
+        public Category Category { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,12 +30,12 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
                 return NotFound();
             }
 
-            var authors =  await _context.Authors.FirstOrDefaultAsync(m => m.ID == id);
-            if (authors == null)
+            var category =  await _context.Category.FirstOrDefaultAsync(m => m.ID == id);
+            if (category == null)
             {
                 return NotFound();
             }
-            Authors = authors;
+            Category = category;
             return Page();
         }
 
@@ -49,7 +48,7 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
                 return Page();
             }
 
-            _context.Attach(Authors).State = EntityState.Modified;
+            _context.Attach(Category).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +56,7 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AuthorsExists(Authors.ID))
+                if (!CategoryExists(Category.ID))
                 {
                     return NotFound();
                 }
@@ -70,9 +69,9 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
             return RedirectToPage("./Index");
         }
 
-        private bool AuthorsExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.Authors.Any(e => e.ID == id);
+            return _context.Category.Any(e => e.ID == id);
         }
     }
 }

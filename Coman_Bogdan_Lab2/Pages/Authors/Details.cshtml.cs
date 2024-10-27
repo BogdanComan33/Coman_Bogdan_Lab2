@@ -19,7 +19,7 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
             _context = context;
         }
 
-        public Publisher Publisher { get; set; } = default!;
+        public Author Authors { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
                 return NotFound();
             }
 
-            var publisher = await _context.Publisher.FirstOrDefaultAsync(m => m.ID == id);
-            if (publisher == null)
+            var authors = await _context.Authors.FirstOrDefaultAsync(m => m.ID == id);
+            if (authors == null)
             {
                 return NotFound();
             }
             else
             {
-                Publisher = publisher;
+                Authors = authors;
             }
             return Page();
         }

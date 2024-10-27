@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Coman_Bogdan_Lab2.Data;
 using Coman_Bogdan_Lab2.Models;
 
-namespace Coman_Bogdan_Lab2.Pages.Authors
+namespace Coman_Bogdan_Lab2.Pages.Categories
 {
     public class CreateModel : PageModel
     {
@@ -19,10 +19,13 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
             _context = context;
         }
 
-       
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
 
         [BindProperty]
-        public Author Authors { get; set; } = default!;
+        public Category Category { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -32,7 +35,7 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
                 return Page();
             }
 
-            _context.Authors.Add(Authors);
+            _context.Category.Add(Category);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

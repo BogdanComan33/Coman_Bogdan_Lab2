@@ -19,7 +19,7 @@ namespace Coman_Bogdan_Lab2.Pages.Books
             _context = context;
         }
 
-        public IActionResult GetOnGet()
+        public IActionResult OnGet()
         {
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
 "PublisherName");
@@ -29,7 +29,7 @@ namespace Coman_Bogdan_Lab2.Pages.Books
 
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
+        public Models.Book Book { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()

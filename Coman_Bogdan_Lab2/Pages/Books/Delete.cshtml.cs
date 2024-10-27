@@ -21,7 +21,7 @@ namespace Coman_Bogdan_Lab2.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
+        public Models.Book Book { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -43,11 +43,7 @@ namespace Coman_Bogdan_Lab2.Pages.Books
             return Page();
         }
 
-        public IActionResult OnGet()
-        {
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "LastName");
-            return Page();
-        }
+      
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {

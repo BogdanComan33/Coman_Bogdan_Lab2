@@ -19,11 +19,11 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
             _context = context;
         }
 
-        public IList<Author> Book { get;set; } = default!;
+        public IList<Author> Authors { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Author = await _context.Author.ToListAsync();
+            Authors = await _context.Authors.ToListAsync();
         }
     }
 }

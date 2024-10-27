@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Coman_Bogdan_Lab2.Data;
 using Coman_Bogdan_Lab2.Models;
 
-namespace Coman_Bogdan_Lab2.Pages.Authors
+namespace Coman_Bogdan_Lab2.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
         }
 
         [BindProperty]
-        public Author Authors { get; set; } = default!;
+        public Category Category { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
                 return NotFound();
             }
 
-            var authors = await _context.Authors.FirstOrDefaultAsync(m => m.ID == id);
+            var category = await _context.Category.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (authors == null)
+            if (category == null)
             {
                 return NotFound();
             }
             else
             {
-                Authors = authors;
+                Category = category;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace Coman_Bogdan_Lab2.Pages.Authors
                 return NotFound();
             }
 
-            var authors = await _context.Authors.FindAsync(id);
-            if (authors != null)
+            var category = await _context.Category.FindAsync(id);
+            if (category != null)
             {
-                Authors = authors;
-                _context.Authors.Remove(Authors);
+                Category = category;
+                _context.Category.Remove(Category);
                 await _context.SaveChangesAsync();
             }
 

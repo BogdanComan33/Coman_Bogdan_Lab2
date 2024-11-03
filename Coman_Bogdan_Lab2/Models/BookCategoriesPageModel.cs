@@ -6,12 +6,21 @@ namespace Coman_Bogdan_Lab2.Models
     public class BookCategoriesPageModel:PageModel
     {
         public List<AssignedCategoryData> AssignedCategoryDataList;
-        public void PopulateAssignedCategoryData(Nume_Pren_Lab2Context context,
+        public void PopulateAssignedCategoryData(Coman_Bogdan_Lab2Context context,
         Book book)
         {
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+
+            if (book.BookCategories == null)
+            {
+                book.BookCategories = new List<BookCategory>();
+            }
             var allCategories = context.Category;
             var bookCategories = new HashSet<int>(
-            book.BookCategories.Select(c => c.CategoryID)); //
+                book.BookCategories.Select(c => c.CategoryID)); //
             AssignedCategoryDataList = new List<AssignedCategoryData>();
             foreach (var cat in allCategories)
             {
@@ -23,7 +32,7 @@ namespace Coman_Bogdan_Lab2.Models
                 });
             }
         }
-        public void UpdateBookCategories(Nume_Pren_Lab2Context context,
+        public void UpdateBookCategories(Coman_Bogdan_Lab2Context context,
         string[] selectedCategories, Book bookToUpdate)
         {
             if (selectedCategories == null)

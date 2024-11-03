@@ -21,9 +21,28 @@ namespace Coman_Bogdan_Lab2.Pages.Categories
 
         public IList<Category> Category { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public IList<Book> Books { get; set; } = default!;
+        public int? SelectedCategoryID { get; set; }
+
+        
+
+    
+
+        public async Task OnGetAsync(int? categoryId)
         {
             Category = await _context.Category.ToListAsync();
+
+            if (categoryId.HasValue)
+            {
+                SelectedCategoryID = categoryId;
+                Books = await _context.Book
+                    .Include(b => b.Author)
+                    .Include(b => b.BookCategories)
+                    .Where(b => b.BookCategories.Any(bc => bc.CategoryID == categoryId))
+                    .ToListAsync();
+            }
+
+
         }
     }
 }
